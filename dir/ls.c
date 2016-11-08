@@ -9,12 +9,12 @@ main(int argc, char *argv[])
     struct dirent   *dirp;
 
     if (argc != 2) {
-        err_quit("Usage: ls <directory_name>");
+        printf("Usage: ls <directory_name>\n");
         return 1;
     }
 
     if ((dp = opendir(argv[1])) == NULL) {
-        err_sys("can't open %s\n", argv[1]);
+        printf("can't open %s\n", argv[1]);
         return 1;
     }
 
