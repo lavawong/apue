@@ -11,5 +11,11 @@ all: $(OBJS)
 %.out:$(LIBOBJS) %.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+# getpid: getpid.c $(COBJS) 
+#     $(CC)  $(CFLAGS) $^ -o $@.out
+
+# child_exec: getpid.c $(COBJS) 
+#     $(CC)  $(CFLAGS) $^ -o $@.out
+
 clean:
 	rm -f *.out
