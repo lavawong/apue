@@ -1,14 +1,14 @@
 # make files
 ROOT=..
-CFLAGS= -I$(ROOT)/include -O
-COBJS= $(ROOT)/lib/apue.c 
+CFLAGS=-ansi -I$(ROOT)/include -Wall -DMACOS -D_DARWIN_C_SOURCE $(EXTRA)
+LIBOBJS=$(ROOT)/lib/apue.c
 CC=gcc
 SOURCES = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)
 
-%.out:%.c
+%.out:$(LIBOBJS) %.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 # getpid: getpid.c $(COBJS) 
