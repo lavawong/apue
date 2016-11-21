@@ -20,3 +20,4 @@ all: $(OBJS)
 clean:
 	rm -f *.out
 	rm -f *.hole
+	rm -f *.bak
