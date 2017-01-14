@@ -23,8 +23,8 @@
 int main(int argc, char *argv[])
 {
     if (argc != 2) {
-        printf("usage: access.out <pathname>\n");
-        return 1;
+        err_sys("usage: access.out <pathname>\n");
+        exit(1);
     }
     if (access(argv[1], R_OK) < 0) {
         printf("access error for %s: %s\n", argv[1], strerror(errno));

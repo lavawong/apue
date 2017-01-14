@@ -1,11 +1,22 @@
 # apue lib
 ROOT=..
-SOURCES = $(wildcard *.c)
-OBJS = $(patsubst %.c,%.o,$(SOURCES))
-LIBMISC = $(ROOT)/lib/libapue.a
+PLATFORM=$(shell $(ROOT)/systype.sh)
+include $(ROOT)/Make.define.$(PLATFORM)
+# SOURCES = $(wildcard *.c)
+# OBJS = $(patsubst %.c,%.o,$(SOURCES))
+SOURCES = %.c
+OBJS = error.o tellwait.o system.o pr_exit.o
 
-apue.o: apue.c
-	gcc -ansi -I$(ROOT)/include -Wall -DMACOS -D_DARWIN_C_SOURCE -c $^ -o $@
+LIBMISC=libapue.a
+
+all: $(OBJS)
+	$(AR) -rcs $(LIBMISC) $?
+
+%.o: %.c 
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY : clean
 
 clean:
-	rm *.o
+	-rm *.o
+	-rm *.a

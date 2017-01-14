@@ -45,3 +45,4 @@ static void err_doit(
     fputs(buf, stderr);
     fflush(NULL);
 }
+

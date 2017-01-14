@@ -1,15 +1,16 @@
 # make files
 ROOT=..
-CFLAGS = -I$(ROOT)/include -O
-COBJS= $(ROOT)/lib/apue.c 
-CC=gcc
+PLATFORM=$(shell $(ROOT)/systype.sh)
+include $(ROOT)/Make.define.$(PLATFORM)
 SOURCES = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)
 
 %.out:%.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f *.out
+
+include $(ROOT)/Make.libapue.inc

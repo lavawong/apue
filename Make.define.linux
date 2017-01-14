@@ -1,0 +1,6 @@
+CC=gcc
+LDFLAGS=
+LDDIR=-L$(ROOT)/lib
+LDLIBS=$(LDDIR) -lapue
+LIBAPUE=$(ROOT)/lib/libapue.a
+CFLAGS=-ansi -I$(ROOT)/include -Wall -DLINUX -D_GNU_SOURCE 
