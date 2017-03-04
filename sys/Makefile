@@ -11,5 +11,8 @@ all: $(OBJS)
 %.out:$(LIBOBJS) %.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+print:
+	@echo $(SOURCES)
+
 clean:
 	rm -f *.out

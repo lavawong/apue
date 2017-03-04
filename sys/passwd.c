@@ -64,6 +64,7 @@ main(int argc, char *argv[])
         pwd = getpwuid( (uid_t)uid );
     }
     if (NULL != pwd) {
+        
         printf("%12s \t %10s \t %10s \t %10s\n", "User", "uid", "gid", "pwd");
         printf("%12s \t %10d \t %10d \t %10s\n", pwd->pw_name, pwd->pw_uid, pwd->pw_gid, pwd->pw_passwd);
         return 0;
