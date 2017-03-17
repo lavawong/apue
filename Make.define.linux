@@ -1,6 +1,6 @@
 CC=gcc
-LDFLAGS=
+LDFLAGS='-lpthread'
 LDDIR=-L$(ROOT)/lib
 LDLIBS=$(LDDIR) -lapue
 LIBAPUE=$(ROOT)/lib/libapue.a
-CFLAGS=-ansi -I$(ROOT)/include -Wall -DLINUX -D_GNU_SOURCE 
+CFLAGS=-std=c99 -I$(ROOT)/include -Wall -DLINUX -D_GNU_SOURCE 

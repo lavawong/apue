@@ -5,7 +5,7 @@ include $(ROOT)/Make.define.$(PLATFORM)
 # SOURCES = $(wildcard *.c)
 # OBJS = $(patsubst %.c,%.o,$(SOURCES))
 SOURCES = %.c
-OBJS = error.o tellwait.o system.o pr_exit.o
+OBJS = error.o tellwait.o system.o pr_exit.o err_exit.o
 
 LIBMISC=libapue.a
 
