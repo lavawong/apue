@@ -27,7 +27,7 @@
 int
 main(void)
 {
-    char    *hostname;
+    char    *hostname = NULL;
     long    host_name_max;
 #ifdef _SC_HOST_NAME_MAX
     host_name_max = sysconf(_SC_HOST_NAME_MAX);

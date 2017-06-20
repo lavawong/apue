@@ -1,18 +1,25 @@
 # make files
 ROOT=..
-CFLAGS=-ansi -I$(ROOT)/include -Wall -std=c99 -DMACOS -D_DARWIN_C_SOURCE $(EXTRA)
-LIBOBJS=$(ROOT)/lib/apue.c
-CC=gcc
+PLATFORM=$(shell $(ROOT)/systype.sh)
+include $(ROOT)/Make.define.$(PLATFORM)
 SOURCES = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)
 
-%.out:$(LIBOBJS) %.c
-	$(CC) $(CFLAGS) $^ -o $@
+%.out: %.c $(LIBAPUE)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+clean:
+	rm -f *.out
+	rm -f *.hole
+	rm -f *.bak
 
 print:
 	@echo $(SOURCES)
 
 clean:
 	rm -f *.out
+
+include $(ROOT)/Make.libapue.inc
+

@@ -2,7 +2,8 @@
 ROOT=..
 PLATFORM=$(shell $(ROOT)/systype.sh)
 include $(ROOT)/Make.define.$(PLATFORM)
-SOURCES = $(wildcard *.c)
+#$(wildcard *.c)
+SOURCES = 
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)

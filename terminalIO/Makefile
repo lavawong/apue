@@ -2,16 +2,18 @@
 ROOT=..
 PLATFORM=$(shell $(ROOT)/systype.sh)
 include $(ROOT)/Make.define.$(PLATFORM)
-SOURCES = .c hostent.c
+SOURCES = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)
 
 %.out: %.c $(LIBAPUE)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) -lrt
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+clean:
+	rm -f *.out
 
 clean:
 	rm -f *.out
 
 include $(ROOT)/Make.libapue.inc
-

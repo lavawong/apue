@@ -8,7 +8,7 @@ OBJS = $(patsubst %.c,%.out,$(SOURCES))
 all: $(OBJS)
 
 %.out: %.c $(LIBAPUE)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) -lrt
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
 	rm -f *.out

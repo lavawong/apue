@@ -5,3 +5,4 @@
 *.log
 *.a
 *.swp
+cmake-build-debug

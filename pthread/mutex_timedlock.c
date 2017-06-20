@@ -1,5 +1,5 @@
 /**
- *
+ * test mutex timedlock system call
  */
 #include "apue.h"
 #include <pthread.h>

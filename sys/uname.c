@@ -22,7 +22,7 @@
 int
 main(void)
 {
-    struct utsname *name;
+    struct utsname *name = NULL;
     
     if (uname(name) != -1) {
         printf("sysname \t nodename \t release \t version \t machine\n");

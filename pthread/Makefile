@@ -2,13 +2,18 @@
 ROOT=..
 PLATFORM=$(shell $(ROOT)/systype.sh)
 include $(ROOT)/Make.define.$(PLATFORM)
-SOURCES = print_ids.c thread_join.c wrlock.c mutex_timedlock.c
+ifeq "$(PLATFORM)" "macos"
+  TLOCK =
+else
+  TLOCK = mutex_timedlock.c
+endif
+SOURCES = print_ids.c thread_join.c wrlock.c $(TLOCK)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
 	
 all: $(OBJS)
 
 %.out: %.c $(LIBAPUE)
-	$(CC) -lpthread $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDFLAGS)
+	$(CC) -lpthread $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 clean:
 	rm -f *.out
