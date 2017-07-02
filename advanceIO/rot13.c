@@ -169,7 +169,7 @@ main(int argc, char* argv[]){
         err_sys("can't open %s", argv[1]);
     if ((ofd = open(argv[2], O_RDWR|O_CREAT|O_TRUNC, FILE_MODE)) < 0)
         err_sys("can't create %s", argv[2]);
-    // sync_translate(ifd, ofd);
+/*     sync_translate(ifd, ofd);*/
     aio_translate(ifd, ofd);
 
     return (0);

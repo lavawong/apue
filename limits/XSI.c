@@ -24,8 +24,12 @@ int main(void)
     printf("NL_LANGMAX      : %ld\n", sysconf(NL_LANGMAX));
     printf("NZERO           : %ld\n", sysconf(NZERO));
     printf("_XOPEN_IOV_MAX  : %ld\n", sysconf(_XOPEN_IOV_MAX));
+#ifdef _XOPEN_NAME_MAX
     printf("_XOPEN_NAME_MAX : %ld\n", sysconf(_XOPEN_NAME_MAX));
+#endif
+#ifdef _XOPEN_PATH_MAX
     printf("_XOPEN_PATH_MAX : %ld\n", sysconf(_XOPEN_PATH_MAX));
+#endif
     return 0;
 }
 

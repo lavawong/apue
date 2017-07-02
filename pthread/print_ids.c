@@ -30,6 +30,6 @@ int main(void)
     if (err != 0)
         err_exit(err, "can't create thread");
     printids("main thread:");
-    sleep(1); // uncomment this line will have fun
+    sleep(1); /* uncomment this line will have fun */
     exit(0);
 }

@@ -5,7 +5,7 @@ include $(ROOT)/Make.define.$(PLATFORM)
 #$(wildcard *.c)
 SOURCES = 
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
-	
+
 all: $(OBJS)
 
 %.out: %.c $(LIBAPUE)

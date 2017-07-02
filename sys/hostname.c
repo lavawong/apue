@@ -20,7 +20,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#ifndef __USE_POSIX
 #define __USE_POSIX
+#endif
+
 #include <limits.h>
 
 

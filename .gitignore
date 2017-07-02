@@ -5,4 +5,6 @@
 *.log
 *.a
 *.swp
+.build
+.idea
 cmake-build-debug

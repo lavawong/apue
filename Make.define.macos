@@ -9,7 +9,7 @@ LINK.c=$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 LDFLAGS=
 LDDIR=-L$(ROOT)/lib
 LDLIBS=$(LDDIR) -lapue $(EXTRALIBS)
-CFLAGS=-ansi -I$(ROOT)/include -Wall -Wcomment -DMACOS -D_DARWIN_C_SOURCE $(EXTRA)
+CFLAGS=--std=c99 -I$(ROOT)/include -Wall -Wcomment -DMACOS -D_DARWIN_C_SOURCE $(EXTRA)
 RANLIB=ranlib
 AR=ar
 AWK=awk

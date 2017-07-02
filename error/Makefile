@@ -5,10 +5,10 @@ LIBOBJS=$(ROOT)/lib/apue.c
 CC=gcc
 SOURCES = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
-	
+
 all: $(OBJS)
 
-%.out:$(LIBOBJS) %.c
+%.out:%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 # getpid: getpid.c $(COBJS) 

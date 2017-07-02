@@ -9,7 +9,7 @@ else
 endif
 SOURCES = print_ids.c thread_join.c wrlock.c $(TLOCK)
 OBJS = $(patsubst %.c,%.out,$(SOURCES))
-	
+
 all: $(OBJS)
 
 %.out: %.c $(LIBAPUE)
