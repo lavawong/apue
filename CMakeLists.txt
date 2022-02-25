@@ -17,8 +17,8 @@ include_directories(./include)
 #
 #add_custom_target(apue COMMAND make -C ${mytest_SOURCE_DIR}
 #        CLION_EXE_DIR=${PROJECT_BINARY_DIR})
-
-add_custom_target(mytest COMMAND make -C ${mytest_SOURCE_DIR}
-        CLION_EXE_DIR=${PROJECT_BINARY_DIR})
+# 编译lib
+add_subdirectory(lib)
 add_executable(apue.out main.c)
 add_executable(hostname.out sys/hostname.c)
+add_executable(lseek.out fileIO/lseek.c)
