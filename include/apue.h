@@ -50,4 +50,8 @@ void WAIT_CHILD(void);
 
 void pr_exit(int);
 
+int lockfile(int);
+
+int set_cloexec(int fd);
+
 #endif /* _APUE_H */

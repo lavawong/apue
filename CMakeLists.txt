@@ -19,6 +19,13 @@ include_directories(./include)
 #        CLION_EXE_DIR=${PROJECT_BINARY_DIR})
 # 编译lib
 add_subdirectory(lib)
+
 add_executable(apue.out main.c)
+
 add_executable(hostname.out sys/hostname.c)
+
 add_executable(lseek.out fileIO/lseek.c)
+
+add_executable(daemonize.out daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c)
+target_link_libraries(daemonize.out apue)
+
