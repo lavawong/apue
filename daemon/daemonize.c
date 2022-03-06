@@ -83,7 +83,8 @@ void daemonize(const char *cmd) {
     /*
      * Initialize the log file.
      */
-    openlog(cmd, LOG_CONS, LOG_DAEMON);
+    openlog(cmd, LOG_NDELAY | LOG_PID | LOG_CONS | LOG_USER, LOG_SYSLOG);
+    setlogmask(LOG_UPTO(LOG_INFO)); // macOS not working!
     if (fd0 != 0 || fd1 != 1 || fd2 != 2) {
         syslog(LOG_INFO, "file descriptors %d %d %d", fd0, fd1, fd2);
 //        exit(1);

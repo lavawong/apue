@@ -29,7 +29,7 @@ void sighup(int signo) {
 }
 
 void *thr_fn(void *arg) {
-    int err, signo;
+    int      err, signo;
     sigset_t sigset;
     sigemptyset(&sigset);
     sigaddset(&sigset, signo);
@@ -51,7 +51,7 @@ void *thr_fn(void *arg) {
     }
 }
 
-void* daemon_main(void* /* ptr */) {
+void *daemon_main(void * /* ptr */) {
     unsigned int counter = 0;
 
     while (g_active == TRUE) {
@@ -59,11 +59,10 @@ void* daemon_main(void* /* ptr */) {
          *
          * All function calls in this loop do not work,
          * but it still can quit from it, when g_active == false.
-         * If I remove the loop from here, the thread will be terminated normally */
-
-        syslog(LOG_NOTICE, "sleep Counter = %d", counter);
+         * If I remove the loop from here, the thread will be terminated normally
+         */
+        syslog(LOG_NOTICE, "sleep Counter = %d", counter++);
         sleep(2);
-        syslog(LOG_NOTICE, "Counter = %d", counter++);
     }
     return NULL;
 }
