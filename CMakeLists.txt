@@ -5,7 +5,7 @@ project(apue)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 #set(SOURCE_DIR ./)
 # find iso lib folder
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/include -lc  -std=C99")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/include -lc  -std=C11")
 include_directories(./include)
 ##add_executable(apue ${SOURCE_FILES})
 ##add_executable(hostname)

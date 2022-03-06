@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "apue.h";
+#include "apue.h"
 
 int main(){
     printf("This is apue project");
