@@ -20,12 +20,12 @@ include_directories(./include)
 # 编译lib
 add_subdirectory(lib)
 
-add_executable(apue.out main.c)
+add_executable(main main.c)
 
-add_executable(hostname.out sys/hostname.c)
+add_executable(hostname sys/hostname.c)
 
-add_executable(lseek.out fileIO/lseek.c)
+add_executable(lseek fileIO/lseek.c)
 
-add_executable(daemonize.out daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c)
-target_link_libraries(daemonize.out apue)
+add_executable(daemonize daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c)
+target_link_libraries(daemonize apue)
 

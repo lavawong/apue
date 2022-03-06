@@ -8,3 +8,6 @@
 .build
 .idea
 cmake-build-debug
+.idea
+build
+.cache
