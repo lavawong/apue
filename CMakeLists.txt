@@ -6,6 +6,7 @@ project(apue)
 #set(SOURCE_DIR ./)
 # find iso lib folder
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/include -lc  -std=C11")
+
 include_directories(./include)
 ##add_executable(apue ${SOURCE_FILES})
 ##add_executable(hostname)
@@ -26,6 +27,6 @@ add_executable(hostname sys/hostname.c)
 
 add_executable(lseek fileIO/lseek.c)
 
-add_executable(daemonize daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c)
+add_executable(daemonize daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c daemon/set_close_exec.c)
 target_link_libraries(daemonize apue)
 

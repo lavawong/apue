@@ -2,9 +2,10 @@
  * Created by Lava Wong on 2022/2/27.
  */
 #include "apue.h"
-#include <syslog.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <sys/resource.h>
+#include <syslog.h>
 
 void daemonize(const char *cmd) {
     int              i, fd0, fd1, fd2;
@@ -17,12 +18,13 @@ void daemonize(const char *cmd) {
      */
     umask(0);
 
-    /*
-     * Get maximum number of file descriptions.
-     */
-    if (getrlimit(RLIMIT_NOFILE, &rl) < 0)
-        err_quit("%s: can't get file limit", cmd);
+    syslog(LOG_INFO, "log cmd:%s", cmd);
+//  int err = setuid(0);
+//  if (err != 0) {
+//    syslog(LOG_INFO, "cmd:%s setuid error! %s", cmd, strerror(errno));
+//  }
 
+    syslog(LOG_INFO, "%s fork before:%d", cmd, getpid());
     /*
      * Become a session leader to lose controlling TTY.
      */
@@ -30,7 +32,7 @@ void daemonize(const char *cmd) {
         err_quit("%s: can't fork", cmd);
     else if (pid != 0) /* parent */
         exit(0);
-    setsid();
+
     /*
      * Ensure future opens won't allocate controlling TTYs.
      */
@@ -43,22 +45,33 @@ void daemonize(const char *cmd) {
         err_quit("%s: can't fork", cmd);
     else if (pid != 0) /* parent */
         exit(0);
-
     /*
      * Change the current working directory to the root so
      * we won't prevent file systems from being unmounted.
      */
     if (chdir("/") < 0)
         err_quit("%s: can't chage directory to /", cmd);
+    syslog(LOG_INFO, "%s fork after:%d", cmd, getpid());
+
+    /*
+     * Get maximum number of file descriptions.
+     */
+    if (getrlimit(RLIMIT_NOFILE, &rl) < 0)
+        err_quit("%s: can't get file limit", cmd);
+    syslog(LOG_INFO, "%s rlim_max:%d", cmd, rl.rlim_max);
+    syslog(LOG_INFO, "%s RLIM_INFINITY:%d", cmd, RLIM_INFINITY);
 
     /*
      * Close all open file descriptors.
      */
-    if (rl.rlim_max == RLIM_INFINITY)
-        rl.rlim_max = 1024;
-    for (i = 0; i < rl.rlim_max; ++i) {
-        close(i);
-    }
+//    if (rl.rlim_max > 0) {
+//        if (rl.rlim_max == RLIM_INFINITY)
+//            rl.rlim_max = 1024;
+//        for (i = 0; i < rl.rlim_max; ++i) {
+//            close(i);
+//        }
+//    }
+    syslog(LOG_INFO, "%s fork after:%d", cmd, getpid());
 
     /*
      * Attach file descriptors -, 1, and 2 to /dev/null.
@@ -71,9 +84,9 @@ void daemonize(const char *cmd) {
      * Initialize the log file.
      */
     openlog(cmd, LOG_CONS, LOG_DAEMON);
-    if (fd0 !=0 || fd1 != 1 || fd2 !=2) {
-        syslog(LOG_ERR, "unexpected file descriptors %d %d %d", fd0, fd1, fd2);
-        exit(1);
+    if (fd0 != 0 || fd1 != 1 || fd2 != 2) {
+        syslog(LOG_INFO, "file descriptors %d %d %d", fd0, fd1, fd2);
+//        exit(1);
     } else {
         syslog(LOG_INFO, "daemonize ok %d: %m", getpid());
     }

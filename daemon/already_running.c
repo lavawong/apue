@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#define LOCKFILE "/var/run/daemon.pid"
+#define LOCKFILE "/var/run/mydaemon/daemon.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
 int already_running(void) {

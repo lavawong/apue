@@ -29,6 +29,10 @@
 
 #define MAXLINE 4096            /* max line length */
 
+typedef int16_t BOOL;
+#define TRUE  1
+#define FALSE 0
+
 void err_dump(const char *, ...); /* {App misc_source} */
 void err_msg(const char *, ...);
 void err_quit(const char *, ...);
