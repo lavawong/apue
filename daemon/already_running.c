@@ -23,6 +23,7 @@ int already_running(void) {
         syslog(LOG_ERR, "can't open %s: %s", LOCKFILE, strerror(errno));
         exit(1);
     }
+
     if (lockfile(fd) < 0 ) {
         if (errno == EACCES || errno == EAGAIN) {
             close(fd);
@@ -31,6 +32,7 @@ int already_running(void) {
         syslog(LOG_ERR, "can't lock %s: %s", LOCKFILE, strerror(errno));
         exit(1);
     }
+    syslog(LOG_NOTICE, "daemon is not running!");
     ftruncate(fd, 0);
     sprintf(buf, "%ld", (long )getpid());
     write(fd, buf, strlen(buf)+1);

@@ -45,6 +45,7 @@ void daemonize(const char *cmd) {
         err_quit("%s: can't fork", cmd);
     else if (pid != 0) /* parent */
         exit(0);
+    setsid();
     /*
      * Change the current working directory to the root so
      * we won't prevent file systems from being unmounted.
@@ -56,21 +57,25 @@ void daemonize(const char *cmd) {
     /*
      * Get maximum number of file descriptions.
      */
-    if (getrlimit(RLIMIT_NOFILE, &rl) < 0)
+    if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
         err_quit("%s: can't get file limit", cmd);
+    } else {
+        /*
+         * Close all open file descriptors.
+         */
+        if (rl.rlim_max > 0) {
+            if (rl.rlim_max == RLIM_INFINITY)
+                rl.rlim_max = 1024;
+            for (i = 0; i < rl.rlim_max; ++i) {
+                close(i);
+            }
+        }
+    }
     syslog(LOG_INFO, "%s rlim_max:%d", cmd, rl.rlim_max);
     syslog(LOG_INFO, "%s RLIM_INFINITY:%d", cmd, RLIM_INFINITY);
 
-    /*
-     * Close all open file descriptors.
-     */
-//    if (rl.rlim_max > 0) {
-//        if (rl.rlim_max == RLIM_INFINITY)
-//            rl.rlim_max = 1024;
-//        for (i = 0; i < rl.rlim_max; ++i) {
-//            close(i);
-//        }
-//    }
+
+
     syslog(LOG_INFO, "%s fork after:%d", cmd, getpid());
 
     /*
@@ -86,9 +91,9 @@ void daemonize(const char *cmd) {
     openlog(cmd, LOG_NDELAY | LOG_PID | LOG_CONS | LOG_USER, LOG_SYSLOG);
     setlogmask(LOG_UPTO(LOG_INFO)); // macOS not working!
     if (fd0 != 0 || fd1 != 1 || fd2 != 2) {
-        syslog(LOG_INFO, "file descriptors %d %d %d", fd0, fd1, fd2);
-//        exit(1);
+        syslog(LOG_NOTICE, "file descriptors %d %d %d", fd0, fd1, fd2);
+        exit(1);
     } else {
-        syslog(LOG_INFO, "daemonize ok %d: %m", getpid());
+        syslog(LOG_NOTICE, "daemonize ok %d", getpid());
     }
 }
