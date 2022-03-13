@@ -51,7 +51,7 @@ void *thr_fn(void *arg) {
     }
 }
 
-void *daemon_main(void * /* ptr */) {
+void *daemon_main(void *ptr ) {
     unsigned int counter = 0;
 
     while (g_active == TRUE) {

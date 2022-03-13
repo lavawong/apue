@@ -71,8 +71,8 @@ void daemonize(const char *cmd) {
             }
         }
     }
-    syslog(LOG_INFO, "%s rlim_max:%d", cmd, rl.rlim_max);
-    syslog(LOG_INFO, "%s RLIM_INFINITY:%d", cmd, RLIM_INFINITY);
+    syslog(LOG_INFO, "%s rlim_max:%llu", cmd, rl.rlim_max);
+    syslog(LOG_INFO, "%s RLIM_INFINITY:%llu", cmd, RLIM_INFINITY);
 
 
 
