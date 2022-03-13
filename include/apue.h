@@ -28,7 +28,8 @@
 #include <signal.h>     /* for SIG_ERR */
 
 #define MAXLINE 4096            /* max line length */
-
+typedef unsigned long long ULLONG;
+typedef long LONG;
 typedef int16_t BOOL;
 #define TRUE  1
 #define FALSE 0
@@ -57,5 +58,18 @@ void pr_exit(int);
 int lockfile(int);
 
 int set_cloexec(int fd);
+/**
+ * 设置文描述父标志
+ * @param fd 文件 FD
+ * @param flags 标识
+ * @return
+ */
+void set_fl(int fd, int flags);
+/**
+ * 清除文件描述符标志
+ * @param fd 文件 FD
+ * @param flags 标识
+ */
+void clr_fl(int fd, int flags);
 
 #endif /* _APUE_H */

@@ -2,7 +2,10 @@
   "configurations": [
     {
       "name": "Mac",
-      "includePath": ["${workspaceFolder}/**"],
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/include/apue.h"
+      ],
       "defines": [],
       "macFrameworkPath": [
         "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
