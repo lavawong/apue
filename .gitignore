@@ -11,3 +11,4 @@ cmake-build-debug
 .idea
 build
 .cache
+.DS_Store
