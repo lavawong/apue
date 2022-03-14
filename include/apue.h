@@ -28,11 +28,29 @@
 #include <signal.h>     /* for SIG_ERR */
 
 #define MAXLINE 4096            /* max line length */
+typedef long long LLONG;
 typedef unsigned long long ULLONG;
 typedef long LONG;
 typedef int16_t BOOL;
 #define TRUE  1
 #define FALSE 0
+
+/* register lock operation */
+#define read_lock(fd,offset,whence,len) \
+    lock_reg(fd, F_SETLK,F_RDLCK,(offset),(whence),(len))
+#define readw_lock(fd,offset,whence,len) \
+    lock_reg(fd, F_SETLKW,F_RDLCK,(offset),(whence),(len))
+#define write_lock(fd,offset,whence,len) \
+    lock_reg(fd, F_SETLK,F_WRLCK,(offset),(whence),(len))
+#define writew_lock(fd,offset,whence,len) \
+    lock_reg(fd, F_SETLKW,F_WRLCK,(offset),(whence),(len))
+#define un_lock(fd,offset,whence,len) \
+    lock_reg(fd, F_SETLKW,F_UNLCK,(offset),(whence),(len))
+#define is_read_lockable(fd,offset,whence,len) \
+    lock_reg(fd, F_RDLCK,(offset),(whence),(len))
+#define is_write_lockable(fd,offset,whence,len) \
+    lock_reg(fd, F_WRLCK,(offset),(whence),(len))
+
 
 void err_dump(const char *, ...); /* {App misc_source} */
 void err_msg(const char *, ...);
@@ -54,8 +72,33 @@ void WAIT_PARENT(void);
 void WAIT_CHILD(void);
 
 void pr_exit(int);
-
-int lockfile(int);
+/**
+ * Lock file descriptor with non block.
+ * @param fd file descriptor
+ * @return 0 success, -1 failure
+ */
+int lockfile(int fd);
+/**
+ * Lock file register
+ * @param fd file descriptor
+ * @param cmd FCNTL(2) lock cmd, EXAMPLE: F_SETLKW or F_SETLK
+ * @param type F_RDLCK, F_WRLCK, F_UNLCK
+ * @param offset byte offset, relative to whence
+ * @param whence SEEK_SET, SEEK_CUR, SEEK_END
+ * @param len lock offset to offset+len #bytes (0 means to EOF
+ * @return 0 success, -1 error
+ */
+int lock_reg(int fd, int cmd, int type, off_t offset, int whence, off_t len);
+/**
+ *
+ * @param fd file descriptor
+ * @param type F_RDLCK, F_WRLCK
+ * @param offset byte offset, relative to whence
+ * @param whence SEEK_SET, SEEK_CUR, SEEK_END
+ * @param len lock offset to offset+len #bytes (0 means to EOF
+ * @return true, return pid of lock owner
+ */
+pid_t lock_test(int fd, int type, off_t offset, int whence, off_t len);
 
 int set_cloexec(int fd);
 /**
