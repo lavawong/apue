@@ -36,3 +36,4 @@ target_link_libraries(non-block-io apue)
 add_executable(dead-flock-test advanceIO/dead_flock_test.c)
 target_link_libraries(dead-flock-test apue)
 
+add_executable(big-endian advanceIO/big_endian.c)
