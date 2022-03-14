@@ -30,6 +30,9 @@ add_executable(lseek fileIO/lseek.c)
 add_executable(daemonize daemon/main.c daemon/already_running.c daemon/daemonize.c daemon/reread.c daemon/set_close_exec.c)
 target_link_libraries(daemonize apue)
 
-add_executable(non-block-io advanceIO/non_block.c advanceIO/non_block.c)
+add_executable(non-block-io advanceIO/non_block.c)
 target_link_libraries(non-block-io apue)
+
+add_executable(dead-flock-test advanceIO/dead_flock_test.c)
+target_link_libraries(dead-flock-test apue)
 
