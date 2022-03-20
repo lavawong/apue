@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stddef.h>
 #include <wchar.h>
+#include <locale.h>
 
 int main(void) {
     int i = 0x12345678;
@@ -15,10 +16,14 @@ int main(void) {
     } else {
         printf("Little-Endian Mode\n");
     }
-    wchar_t *name = "我的";
-    printf("%s\n", name);
-    printf("%lu\n", sizeof(*name));
-    printf("%lu\n", wcslen(name));
+    setlocale(LC_ALL, "");
+    wchar_t name[] = L"我的c1";
+    wprintf(L"name: %S\n", name);
+    wprintf(L"name[0] with %%lc: %lc\n", name[0]);
+    char b = name[0];
+    printf("name[0] with %%c: %c, code: %d\n", b, b);
+    printf("sizeof: %lu\n", sizeof(*name));
+    printf("wcslen: %lu\n", wcslen(name));
 
     return 0;
 }
