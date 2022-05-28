@@ -37,3 +37,6 @@ add_executable(dead-flock-test advanceIO/dead_flock_test.c)
 target_link_libraries(dead-flock-test apue)
 
 add_executable(big-endian advanceIO/big_endian.c)
+
+add_executable(ics-mrb ics/memory_referencing_bug.c)
+add_executable(ics-ap ics/access_patterns.c)
