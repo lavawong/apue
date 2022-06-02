@@ -10,7 +10,7 @@
       "request": "launch",
       "program": "${command:cmake.launchTargetPath}",
       "args": [],
-      "stopOnEntry": true,
+      "stopOnEntry": false,
       "cwd": "${config:cmake.buildDirectory}",
       "environment": [
         {
